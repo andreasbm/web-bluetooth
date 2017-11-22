@@ -1,5 +1,5 @@
 {
-	"name": "an-translate",
+	"name": "web-bluetooth",
 	"version": "0.0.1",
 	"scripts": {
 		"start": "http-server -a localhost -p 8000 -c-1 -o",
