@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>web-bluetooth</title>
+	<style>
+		:root {
+			--player-bg: white;
+			--player-shadow: darkgrey;
+			--target-color: white;
+		}
+
+		body {
+			background: var(--target-color);
+		}
+	</style>
+</head>
+<body>
+<wbt-game-controller gameDuration="30"></wbt-game-controller>
+<button id="add_player">Add new player</button>
+<div id="players_container"></div>
+
+
+<script type="module" src="util.js"></script>
+<script type="module" src="player.js"></script>
+<script type="module" src="game-controller.js"></script>
+<script type="module">
+	import {Player} from "./player.js";
+
+	const $addPlayerBtn = document.querySelector("#add_player");
+	const $playersContainer = document.querySelector("#players_container");
+	const gameController = document.querySelector("wbt-game-controller");
+
+	$addPlayerBtn.addEventListener("click", e => {
+		const player = new Player();
+		gameController.addPlayer(player);
+		$playersContainer.appendChild(player);
+	});
+</script>
+</body>
+</html>
