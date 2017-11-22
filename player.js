@@ -8,16 +8,10 @@ template.innerHTML = `
 		padding: 1rem;
 		margin: 0.5rem;
 	}
-	
-	#color {
-		width: 5rem;
-		height: 5rem;
-		background: lightgrey;
-	}
 </style>
 
 <button>Register device</button>
-<h1 id="status">Pairing...</h1>
+<h1 id="status"></h1>
 <h1 id="points"></h1>
 `;
 
@@ -29,6 +23,7 @@ export class Player extends HTMLElement {
 
 	set points (val) {
 		this.setAttribute("points", val);
+		this.$points.innerHTML = `Points: ${val}`;
 	}
 
 	get points () {
@@ -50,6 +45,9 @@ export class Player extends HTMLElement {
 	connectedCallback () {
 		const btn = this.shadowRoot.querySelector("button");
 		btn.addEventListener("click", this._requestDevice.bind(this));
+
+		this.points = 0;
+		this._setStatusText("Register device");
 	}
 
 	/**
@@ -78,15 +76,6 @@ export class Player extends HTMLElement {
 				this.$status.innerText = "Connected!";
 			}, 3000);
 		}
-	}
-
-	/**
-	 * Adjusts the points of the player and notifies the user.
-	 * @param val
-	 * @private
-	 */
-	_adjustPoints (val) {
-		this.points += val;
 	}
 
 	/**
@@ -140,6 +129,15 @@ export class Player extends HTMLElement {
 	}
 
 	/**
+	 * Sets the points text.
+	 * @param points
+	 * @private
+	 */
+	_updatePointssText (points) {
+		this.$points.innerHTML = `Points: ${points}`;
+	}
+
+	/**
 	 * Sets the current color.
 	 * @param color
 	 * @private
@@ -175,8 +173,7 @@ export class Player extends HTMLElement {
 		sound[2] = duration & 0xFF;
 		sound[3] = (duration >> 8) & 0xFF;
 		sound[4] = 300;
-		// volume hard coded to 100%
-		// configure speaker to use "frequency and duration" mode
+
 		let mode = new Uint8Array(2);
 		mode[0] = 1;
 		mode[1] = 1;

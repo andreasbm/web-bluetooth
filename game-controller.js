@@ -95,7 +95,6 @@ export class GameController extends HTMLElement {
 	_checkForWinner () {
 		for (const player of this.players) {
 			const isWinner = testColor(this.targetColor, player.currentColor);
-			console.log(isWinner);
 			if (isWinner) {
 				this._announceWinner(player);
 				return true;
