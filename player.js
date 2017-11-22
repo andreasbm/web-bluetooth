@@ -12,7 +12,7 @@ template.innerHTML = `
 
 <button>Register device</button>
 <h1 id="status"></h1>
-<h1 id="points"></h1>
+<h1 id="points">Points: 0</h1>
 `;
 
 export class Player extends HTMLElement {
@@ -46,7 +46,6 @@ export class Player extends HTMLElement {
 		this.$status = this.shadowRoot.querySelector("#status");
 		this.$points = this.shadowRoot.querySelector("#points");
 
-		this.points = 0;
 		this._setStatusText("Register device");
 	}
 
