@@ -21,17 +21,17 @@ export class GameController extends HTMLElement {
 
 		const shadow = this.attachShadow({mode: "open"});
 		shadow.appendChild(template.content.cloneNode(true));
+	}
 
+	connectedCallback () {
 		this.targetColor = randCol();
 		this.timer = null;
 		this.players = [];
 
-		this.$counter = shadow.querySelector("#counter");
-		this.$startBtn = shadow.querySelector("#start_game");
+		this.$counter = this.shadowRoot.querySelector("#counter");
+		this.$startBtn = this.shadowRoot.querySelector("#start_game");
 
 		this.$startBtn.addEventListener("click", this._restart.bind(this));
-
-		window.gameController = this;
 	}
 
 	/**

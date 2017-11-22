@@ -35,16 +35,16 @@ export class Player extends HTMLElement {
 
 		const shadow = this.attachShadow({mode: "open"});
 		shadow.appendChild(template.content.cloneNode(true));
-
-		this.speakerChar = null;
-		this.currentColor = [0, 0, 0];
-		this.$status = shadow.querySelector("#status");
-		this.$points = shadow.querySelector("#points");
 	}
 
 	connectedCallback () {
 		const btn = this.shadowRoot.querySelector("button");
 		btn.addEventListener("click", this._requestDevice.bind(this));
+
+		this.speakerChar = null;
+		this.currentColor = [0, 0, 0];
+		this.$status = this.shadowRoot.querySelector("#status");
+		this.$points = this.shadowRoot.querySelector("#points");
 
 		this.points = 0;
 		this._setStatusText("Register device");
